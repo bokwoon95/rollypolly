@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
 
-  <!-- JavaScript code -->
-  <script>
-    // Every time a user presses a key, the text on the 'code' field should be mirrored
-    // onto the 'display' element.
-    // If the user correctly types 'damonedoc', the text field should be disabled,
-    // the 'display' text should be turned gray, and the 'secret' element
-    // should be displayed.
-  </script>
+    <!-- JavaScript code -->
+    <script>
+      // Every time a user presses a key, the text on the 'code' field should be mirrored
+      // onto the 'display' element.
+      // If the user correctly types 'damonedoc', the text field should be disabled,
+      // the 'display' text should be turned gray, and the 'secret' element
+      // should be displayed.
+      password = "password";
+      function keypresshandler() {
+        text = document.getElementById('code').value;
+        document.getElementById('display').innerHTML = text;
+        if (text === password) {
+          console.log("you win");
+          document.getElementById('code').disabled = true;
+          document.getElementById('display').style.color = "gray";
+          document.getElementById('secret').style.visibility = "visible";
+          document.getElementById('secret').style.color = "green";
+        }
+      }
+      document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+          document.getElementById('code').addEventListener("keydown", keypresshandler)
+          document.getElementById('code').addEventListener("keyup", keypresshandler)
+        }
+      )
+    </script>
 
-  <style>
-    #secret {
-      visibility: hidden;
-    }
-  </style>
-  
-  <title>Code Nomad 2018</title>
-</head>
-<body>
-<form id="form">
-  <label>Unlock the Code:</label> &nbsp; <input type="text" id="code" autofocus/><br />
-</form>
+    <style>
+      #secret {
+        visibility: hidden;
+      }
+    </style>
 
-<h1 id="display"></h1>
+    <title>Code Nomad 2018</title>
+  </head>
+  <body>
+    <form id="form">
+      <label>Unlock the Code:</label> &nbsp; <input type="text" id="code" autofocus/><br />
+    </form>
 
-<h3 id="secret">YOU HAVE UNLOCKED THE CODE!</h3>
-</body>
+    <h1 id="display"></h1>
+
+    <h3 id="secret">YOU HAVE UNLOCKED THE CODE!</h3>
+  </body>
 </html>
