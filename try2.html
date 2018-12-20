@@ -7,9 +7,34 @@
     var time = 0;
     window.onload = function() {
       // Initialize #countdown innerHTML to '00:00'
+      document.getElementById('countdown').innerHTML = "00:00";
+
+      function format_seconds_to_minutes(seconds) {
+        function pad(n, width, z) {
+          z = z || '0';
+          n = n + '';
+          return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+        }
+        mins = pad(Math.floor(seconds / 60), 2);
+        secs = pad(seconds % 60, 2);
+        return mins + ":" + secs;
+      }
 
       // Handle onsubmit here:
       // Get the time entered on the text-field then start the timer
+      document.getElementById('form').onsubmit = function(evt) {
+        evt.preventDefault();
+        countdown_seconds = document.getElementById('time').value;
+        countdown_event = setInterval(function() {
+          output = format_seconds_to_minutes(countdown_seconds);
+          document.getElementById('countdown').innerHTML = output;
+          countdown_seconds--;
+          // if countdown reaches 00:00, clear the event
+          if (countdown_seconds === -1) {
+            clearInterval(countdown_event);
+          }
+        }, 1000);
+      };
     };
 
   </script>
