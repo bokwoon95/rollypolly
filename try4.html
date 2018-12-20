@@ -16,7 +16,37 @@
 
   <!-- JavaScript code -->
   <script>
+    window.onload = function() {
+      document.getElementById('submit').disabled = true;
 
+      $('#name').on('focus keyup', function() {
+        if (document.getElementById('name').value.match(/^.{6,60}$/)) {
+          document.getElementById('name').classList.remove('red-field');
+          document.getElementById('msg').innerHTML = "";
+          if (document.getElementById('birth').value.match(/^([012][0-9]|3[012])([/-])(0[0-9]|1[012])\2\d{4}$/)) {
+            document.getElementById('submit').disabled = false;
+          }
+        } else {
+          document.getElementById('name').classList.add('red-field');
+          document.getElementById('msg').innerHTML = "Must have between 6-60 characters";
+          document.getElementById('submit').disabled = true;
+        }
+      });
+
+      $('#birth').on('focus keyup', function() {
+        if (document.getElementById('birth').value.match(/^([012][0-9]|3[012])([/-])(0[0-9]|1[012])\2\d{4}$/)) {
+          document.getElementById('birth').classList.remove('red-field');
+          document.getElementById('msg').innerHTML = "";
+          if (document.getElementById('name').value.match(/^.{6,60}$/)) {
+            document.getElementById('submit').disabled = false;
+          }
+        } else {
+          document.getElementById('birth').classList.add('red-field');
+          document.getElementById('msg').innerHTML = "Must match DD-MM-YYYY or DD/MM/YYYY";
+          document.getElementById('submit').disabled = true;
+        }
+      });
+    }
   </script>
 
   <title>JavaScript Demo</title>
